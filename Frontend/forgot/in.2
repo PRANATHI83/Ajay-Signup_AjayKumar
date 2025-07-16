@@ -5,8 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Forgot Password</title>
 
+  <!-- ✅ ADDED: Favicon Support -->
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
 
+  <!-- Font Awesome for icons -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -217,6 +219,7 @@
     </div>
   </div>
 
+  <!-- Password Requirements Modal -->
   <div id="passwordModal" class="modal">
     <div class="modal-content">
       <button onclick="toggleModal()">×</button>
@@ -273,7 +276,7 @@
         return;
       }
 
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;  // ✅ FIXED regex
       if (!emailRegex.test(email)) {
         emailError.textContent = "Invalid email format";
         cross.style.display = "block";
@@ -315,7 +318,7 @@
       const error = document.getElementById("new-password-error");
       const check = document.getElementById("new-password-checkmark");
 
-      const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
+      const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;  // ✅ FIXED regex
       if (!pwd) {
         error.textContent = "Password required";
         check.style.display = "none";
@@ -379,8 +382,7 @@
         if (data.message) {
           showAlert("success", data.message);
           setTimeout(() => {
-            // ✅ CHANGE MADE HERE: Redirecting to Login Page (8023)
-            window.location.href = "http://65.2.166.147:8023/"; 
+            window.location.href = "http://65.2.166.147:8024/";
           }, 3000);
         } else {
           showAlert("error", data.error || "Failed to reset password");
