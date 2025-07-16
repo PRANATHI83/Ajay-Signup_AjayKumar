@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -643,7 +642,7 @@
                 <button type="submit" id="signupButton" class="form-button" disabled>Sign Up</button>
             </form>
             <div class="links">
-                <a href="/login">Already have an account? Login</a>
+                <a href="http://13.233.233.23:8023/">Already have an account? Login</a>
             </div>
         </div>
     </div>
@@ -813,7 +812,7 @@ async function validateEmail() {
             errorElement.style.color = '#0077ff';
             errorElement.style.fontWeight = 'normal';
             
-            const response = await fetch('http://localhost:3000/check-email-data', {
+            const response = await fetch('http://13.233.233.23:3011/check-email-data', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email })
@@ -971,7 +970,7 @@ async function validateEmail() {
                 signupButton.disabled = true;
                 signupButton.textContent = 'Signing Up...';
                 
-                const response = await fetch('http://localhost:3000/signup-data', {
+                const response = await fetch('http://13.233.233.23:3011/api/signup', {
                     method: 'POST',
                     body: formData
                 });
@@ -980,7 +979,7 @@ async function validateEmail() {
                 if (data.message) {
                     showAlert('success', data.message);
                     setTimeout(() => {
-                        window.location.href = '/login';
+                        window.location.href = 'http://13.233.233.23:8023';
                     }, 3000);
                 } else {
                     document.getElementById('confirm-password-error').textContent = data.error || 'Signup failed';
