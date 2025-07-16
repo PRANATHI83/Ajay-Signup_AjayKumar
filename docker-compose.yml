@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./Backend
+    container_name: signup_backend
+    ports:
+      - "3011:3011"
+    depends_on:
+      - db
+    environment:
+      PORT: 3011
+      DB_USER: postgres
+      DB_HOST: db
+      DB_NAME: auth_db
+      DB_PASSWORD: admin234
+      DB_PORT: 5432
+      FRONTEND_URL: http://65.2.166.147:8022
+    volumes:
+      - ./Backend:/app
+    networks:
+      - signup_network
+
+  frontend:
+    build: ./Frontend
+    container_name: signup_frontend
+    ports:
+      - "8022:80"
+    networks:
+      - signup_network
+
+  login:
+    build: ./login
+    container_name: signup_login
+    ports:
+      - "8023:80"
+    networks:
+      - signup_network
+
+  signup:
+    build: ./signup
+    container_name: signup_signup
+    ports:
+      - "8024:80"
+    networks:
+      - signup_network
+
+  db:
+    image: postgres:15
+    container_name: signup_db
+    ports:
+      - "5443:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin234
+      POSTGRES_DB: auth_db
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - signup_network
+
+volumes:
+  db_data:
+
+networks:
+  signup_network:
+    driver: bridge
+
